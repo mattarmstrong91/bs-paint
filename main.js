@@ -1,7 +1,30 @@
 /*******************
  * OUR HELPER CODE *
 *******************/
+constructor() {
+  super(myPaint)
 
+  const shadowRoot = this.attachShadow({mode: 'open'})
+  shadowRoot.innerHTML = `<canvas></canvas>`
+  const canvas = shadowRoot.querySelector('canvas')
+
+  states.set(this, {
+    drawing: false,
+    color: "#000000",
+    bgcolor: "#ffffff",
+    size: 10,
+    canvas,
+    context: canvas.getContext('2d')
+  })
+
+  histories.set(this, {
+    log: [10],
+    currentEntry: [10],
+    currentStep: 0
+  })
+}
+
+static get observedAttributes() {
 /*
  * Here we add the squares to the canvas dynamically.
  * You can mostly leave this section alone!
